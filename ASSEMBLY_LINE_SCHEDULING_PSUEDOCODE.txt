@@ -1,0 +1,36 @@
+ASSEMBLY_LINE_SCHEDULING(n, e, a, t, x)  
+f1[1] ← e1 + a1,1
+f2[1] ← e2 + a2,1
+
+for j ← 2 to n do
+{
+	if(f1[j - 1] + a1, j  ≤ f2[j - 1] + t[j - 1] + t + a2, j)
+	{	
+		f1[j] ← f1[j - 1] + a1, j
+		L1[j] ← 1
+	}
+	else
+	{
+		f1[j] ← f2[j - 1] + t2,j - 1+ a1, j
+		L1[j] ← 2
+	}
+	if(f2[j - 1] + a2, j ≤ f1[j - 1] + t1, j - 1 + a2, j)
+	{	f2[j] ← f2[j - 1] + a2, j
+		L2[j] ← 2
+	}
+	else
+	{
+		f2[j] ← f1[j - 1] + t1, j - 1 + a2, j
+		L2[j] ← 1
+	}
+
+	if f1[n] + x1  ≤ f2[n] + x2 then
+	{	F* ← f1[n] + x1
+		L* ← 1
+	}
+	else
+	{
+		F* ← f2[n] + x2
+		L* ← 2
+	}
+}
