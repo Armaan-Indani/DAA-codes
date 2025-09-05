@@ -150,7 +150,6 @@ int main()
                         continue;
                     }
 
-                    // printf("Going from vertex %d to %d\n", E[i]->from, E[i]->to);
                     visited[E[i]->to] = 1;
                     enqueue(Q, E[i]->to);
                     parent[E[i]->to] = E[i]->from;
@@ -159,21 +158,8 @@ int main()
             dequeue(Q);
         }
 
-        // printf("[");
-        // for (int i = 0; i < n; i++)
-        // {
-        //     printf("%d ", visited[i]);
-        // }
-        // printf("]\n[");
-        // for (int i = 0; i < n; i++)
-        // {
-        //     printf("%d ", parent[i]);
-        // }
-        // printf("]");
-
         int vert = 8;
         int min_cap = INT_MAX;
-        // printf("\n Path (reversed):");
         while (vert != 0)
         {
             if (parent[vert] == -1)
@@ -181,7 +167,6 @@ int main()
                 pathAvailable = 0;
                 break;
             }
-            // printf("%d ", vert);
             int vert2 = parent[vert];
             for (int i = 0; i < 16; i++)
             {
@@ -199,30 +184,22 @@ int main()
             break;
         }
 
-        // printf("\nmin_cap = %d", min_cap);
         ans += min_cap;
 
         vert = 8;
         while (vert != 0)
         {
             int vert2 = parent[vert];
-            // printf("\n(vert2 = %d)\n", vert2);
             for (int i = 0; i < 16; i++)
             {
                 if ((E[2 * i]->from == vert2) && (E[2 * i]->to == vert) && E[2 * i]->capacity - E[2 * i]->flow >= min_cap)
                 {
-                    // printf("{%d} ", 2 * i);
                     E[2 * i]->flow += min_cap;     // Forward Edge
                     E[2 * i + 1]->flow -= min_cap; // Residual Edge
-                    // printf("\nChanging flow for edge %d,%d\n", E[2 * i]->from, E[2 * i]->to);
                 }
             }
             vert = vert2;
         }
-        // for (int i = 0; i < 32; i++)
-        // {
-        //     // printf("[%d, %d, %d, %d]\n", E[i]->capacity, E[i]->flow, E[i]->from, E[i]->to);
-        // }
     }
 
     printf("max flow = %d", ans);
